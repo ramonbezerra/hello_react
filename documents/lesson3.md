@@ -412,25 +412,6 @@ import React  from 'react';
 import { Formik, ErrorMessage, Field } from 'formik';
 import * as Yup from 'yup';
 
-function validateName(value) {
-  let error;
-  if (!value) {
-    error = 'Email is Required';
-  }
-  return error;
-}
-
-function validatePassword(value) {
-  let error;
-  if (!value) {
-    error = 'Password is Required';
-  }
-  if (value.length < 8) {
-    error = 'Min length of Password is 8 chars';
-  }
-  return error;
-}
-
 const LoginSchema = Yup.object().shape({
   email: Yup.string().required('Required').email('Invalid'),
   password: Yup.string().required('Required').min(4, 'Too short!').max(10, 'Too long!')
@@ -463,7 +444,6 @@ const FormYupValidation = () => {
             E-mail*:
             <Field type="text" name="email"
                    onBlur={handleBlur}
-                  //  validate={validateName}
                    onChange={handleChange}/>
           </label>
           <ErrorMessage name="email" className="error" component="span"/>
@@ -472,7 +452,6 @@ const FormYupValidation = () => {
             Password*:
             <Field type="password" name="password"
                    onBlur={handleBlur}
-                  //  validate={validatePassword}
                    onChange={handleChange}/>
           </label>
           <ErrorMessage name="password" className="error" component="span" />
