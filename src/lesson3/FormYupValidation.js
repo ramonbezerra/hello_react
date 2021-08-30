@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 function validateName(value) {
   let error;
   if (!value) {
-    error = 'Name is Required';
+    error = 'Email is Required';
   }
   return error;
 }
@@ -22,8 +22,8 @@ function validatePassword(value) {
 }
 
 const LoginSchema = Yup.object().shape({
-  name: Yup.string().required('Required'),
-  password: Yup.string().required('Required').min(8, 'Too short!')
+  email: Yup.string().required('Required').email('Invalid'),
+  password: Yup.string().required('Required').min(4, 'Too short!').max(10, 'Too long!')
 });
 
 const FormYupValidation = () => {
@@ -39,8 +39,7 @@ const FormYupValidation = () => {
   return (
     <Formik
       validationSchema={LoginSchema}
-      initialStatus={{isValidating: false}}
-      initialValues={{ name: '', password: ''}}
+      initialValues={{ email: '', password: ''}}
       onSubmit={handleSubmitting}
     >
       {({
@@ -51,19 +50,19 @@ const FormYupValidation = () => {
         }) => (
         <form onSubmit={handleSubmit}>
           <label>
-            Name*:
-            <Field type="text" name="name"
+            E-mail*:
+            <Field type="text" name="email"
                    onBlur={handleBlur}
-                //    validate={validateName}
+                  //  validate={validateName}
                    onChange={handleChange}/>
           </label>
-          <ErrorMessage name="name" className="error" component="span"/>
+          <ErrorMessage name="email" className="error" component="span"/>
           <br/><br/>
           <label>
             Password*:
             <Field type="password" name="password"
                    onBlur={handleBlur}
-                //    validate={validatePassword}
+                  //  validate={validatePassword}
                    onChange={handleChange}/>
           </label>
           <ErrorMessage name="password" className="error" component="span" />

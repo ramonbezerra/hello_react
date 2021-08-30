@@ -44,7 +44,7 @@ const FormLevelValidation = () => {
                     <br />
                     <label>
                         Password:
-                        <Field type="text" name="password"
+                        <Field type="password" name="password"
                                 validate={validatePassword}
                                 onBlur={handleBlur}
                                 onChange={handleChange}

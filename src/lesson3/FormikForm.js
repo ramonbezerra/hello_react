@@ -10,10 +10,7 @@ const FormikForm = () => {
     };
 
     return (
-        <Formik
-            initialValues={{ email: 'sfes', password: '' }}
-            onSubmit={handleSubmitting}
-            >
+        <Formik initialValues={{ email: '', password: '' }} onSubmit={handleSubmitting}>
             {({values, handleChange, handleSubmit, isSubmitting}) => (
                 <form onSubmit={handleSubmit}>
                     <label>
