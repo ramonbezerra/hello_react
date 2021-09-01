@@ -32,6 +32,18 @@ Logo, a estrutura da nossa aplicação será da seguinte forma:
 - package.json
 ```
 
+Lembre-se de mudar o arquivo `/src/index.js` com o componente `App.js` desta aula.
+
+`/src/index.js`
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './lesson2/App';
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+
 ## Montando um componente
 
 O ciclo de vida de montagem de um novo componente passa pelo construtor e por outros métodos. O construtor de um Class Component irá receber as `props`, valores estáticos passados por um componente pai, além de ser o lugar natural para configurar o estado inicial do próprio componente e outros valores iniciais.

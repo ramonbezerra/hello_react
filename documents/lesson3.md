@@ -40,6 +40,66 @@ Logo, a estrutura da nossa aplicação será da seguinte forma:
 - package.json
 ```
 
+Lembre-se de mudar o arquivo `/src/index.js` com o componente `App.js` desta aula.
+
+`/src/index.js`
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './lesson3/App';
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+## Gerenciamento de pacotes e dependências
+
+Nas demonstrações utilizaremos o gerenciador de pacotes [yarn](https://yarnpkg.com/), que opera sobre o [npm](https://www.npmjs.com/) mas você pode utilizar também o próprio npm para instalar as dependências executar ou buildar a aplicação.
+
+O arquivo package.json estará configurado inicialmente da seguinte forma (algumas das configurações foram copiadas do [boilerplate create-react-app](https://pt-br.reactjs.org/docs/create-a-new-react-app.html)):
+
+`package.json`
+```
+{
+    "name": "hello_react",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+      "axios": "^0.21.0",
+      "formik": "^2.2.5",
+      "react": "^17.0.1",
+      "react-dom": "^17.0.1",
+      "react-scripts": "^4.0.0",
+      "react-router-dom": "^5.2.0",
+      "yup": "^0.30.0"
+    },
+    "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+      "extends": [
+        "react-app",
+        "react-app/jest"
+      ]
+    },
+    "browserslist": {
+      "production": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+      ],
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
+    }
+  }
+```
+
 ## Formulários Simples
 
 Os formulários são mecanismos de interação do usuário com a página, pelos quais o mesmo pode enviar dados, que precisam ser consultados. A maneira mais conveniente de conseguir isso é usando componentes não controlados, sem usar o React para alterar o valor do campo de entrada, deixando essa tarefa para o navegador. Assim, manteremos referências separadas aos elementos DOM que podemos utilizar para manipular e ler os elementos. Veja essa tarefa sendo executada no exemplo a seguir:  
