@@ -129,7 +129,7 @@ const App = () => (
     </div>;
 );
 
-export default Hello;
+export default App;
 ```
 
 Então, nosso `index.js` será sempre assim (mudaremos nas próximas aulas apenas a pasta fonte do `App.js`): 
@@ -169,7 +169,25 @@ export default class Hello extends Component {
 }
 ```
 
-Não se esqueça de adicionar seu novo componente ao componente principal, passando a propriedade `name` para completar a frase de boas-vindas:
+**Abrindo um parêntese aqui**, esse componente poderia ser escrito como um Functional Component, sem estado (por enquanto!), aproveitando as props, da seguinte forma:
+
+```
+const HelloPersonal = props => <p>Hello, {this.props.name}!</p>;
+
+export default HelloPersonal;
+```
+
+Se nós quiséssemos passar algumas `props` utilizando do recurso de destructuring assignments, poderíamos fazer da seguinte forma (considere o exemplo de ter duas props: name e lastName):
+
+```
+const HelloPersonal = ({name, lastName}) => <p>Hello, {name} {lastName}!</p>;
+
+export default HelloPersonal;
+```
+
+Assim, nosso código fica menos verboso, mais elegante e mais fácil de manter.
+
+**Continuando**, não se esqueça de adicionar seu novo componente ao componente principal, passando a propriedade `name` para completar a frase de boas-vindas:
 
 `/src/lesson1/App.js`
 ```
