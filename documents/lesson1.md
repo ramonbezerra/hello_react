@@ -252,7 +252,7 @@ Com essa função, o valor da flag `showMessage` será modificado para o inverso
     }
 ```
 
-Maravilha! Já teremos algo mais dinâmico na nossa página. Para complementar, vamos aproveitar e colocar uma renderização condicional, fazendo com que a mensagem do botão e a própria mensagem de boas-vindas sejam exibidas a partir do valor da flag `showMessage`:
+Maravilha! Já teremos algo mais dinâmico na nossa página. Para complementar, vamos aproveitar e colocar uma renderização condicional, fazendo com que a mensagem do botão e a própria mensagem de boas-vindas sejam exibidas a partir do valor da flag `showMessage` (note também o uso de destructuring assignments, reduzindo a verbosidade do código, nas primeiras linhas da função `render()`):
 
 `/src/lesson1/HelloPersonal.js`
 ```
@@ -267,13 +267,15 @@ Maravilha! Já teremos algo mais dinâmico na nossa página. Para complementar, 
     }
 
     render() {
+        const {showMessage} = this.state;
+        const {name} = this.props;
         return (
             <div>
-                <p>Hello, {this.props.name}!</p>
+                {<p>Hello, {name}!</p>}
                 <button onClick={() => this.toogleWelcomeMessage()}>
-                    Click to {this.state.showMessage ? "hide" : "show"} a message!
+                   Click to {showMessage ? 'hide' : 'show'} a message! 
                 </button>
-                {this.welcomeMessage()}
+                {showMessage ? this.welcomeMessage() : null}
             </div>
         );
     }
