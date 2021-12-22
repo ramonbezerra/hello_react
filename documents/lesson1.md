@@ -150,7 +150,7 @@ Para construir aplicações com conteúdos dinâmicos, vamos construir um novo c
 ```
 import { Component } from 'react';
 
-export default class Hello extends Component {
+export default class HelloPersonal extends Component {
     constructor(props) {
         super(props);
         this.state = {
