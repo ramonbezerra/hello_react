@@ -3,7 +3,8 @@ import Homepage from "./Homepage";
 import Search from './Search';
 import Navbar from './Navbar';
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NotFound from "./NotFound";
 
 const RouteTo = path => {
     const paths = path.split('/').map(p => p.toLowerCase()).slice(1);
@@ -30,24 +31,16 @@ const App = () => (
 
         <Router>
             <Navbar />
-            <Switch>
-                <Route exact path="/">
-                    <Homepage />
-                </Route>
+            <Routes>
+                <Route path="/" element={<Homepage />}/>
+                
+                <Route path="/about" element={<About />}/>  
+                
 
-                <Route path="/about">  
-                    <About />
-                </Route>
+                <Route path="/search" element={<Search />} />  
 
-                <Route path="/search">  
-                    <Search />
-                </Route>
-
-                <Route path="*">
-                    <h1>404 - Component Not Found</h1>
-                    <a href="/">Return Home</a>
-                </Route>
-            </Switch>
+                <Route path="*" element={<NotFound />}/>
+            </Routes>
         </Router>
     </div>
 );
