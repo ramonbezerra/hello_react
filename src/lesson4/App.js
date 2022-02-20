@@ -2,9 +2,9 @@ import About from "./About";
 import Homepage from "./Homepage";
 import Search from './Search';
 import Navbar from './Navbar';
+import NotFound from "./NotFound";
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import NotFound from "./NotFound";
 
 const RouteTo = path => {
     const paths = path.split('/').map(p => p.toLowerCase()).slice(1);
@@ -36,7 +36,6 @@ const App = () => (
                 
                 <Route path="/about" element={<About />}/>  
                 
-
                 <Route path="/search" element={<Search />} />  
 
                 <Route path="*" element={<NotFound />}/>

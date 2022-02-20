@@ -202,7 +202,7 @@ Faça novametne o teste em seu navegador, digitando as rotas `http://localhost:3
 
 O React Router, conforme apresentado no início, é uma biblioteca com uma proposta simples e ao mesmo tempo robusta de trabalhar com roteamento de páginas de Single Page Applications, fornecendo vários mecanismos integrados diferentes para roteamento para componentes, tratamento de rotas padrão e de erro e ainda mais funcionalidades detalhadas, como lidar com autenticação. 
 
-Para trabalhar com a biblioteca, iremos importar no nosso arquivo principal o componente `BrowserRouter`, que será apelidado em nossa instrução de importação apenas de `Router`. Este é o componente de nível superior dentro do qual precisamos envolver nosso código roteável. A seguir, importaremos o `Switch`, que irá funcionar da mesma maneira que a instrução switch usada no primeiro exercício. Isso inclui todas as decisões de rota que precisam ser feitas durante a construção de um aplicativo. Por fim, construiremos as rotas com o componente `Route`, semelhante a cada uma das declarações de caso no bloco switch do exemplo anterior. Cada rota indica um caminho para capturar e renderizar um determinado componente ou bit de código JSX.
+Para trabalhar com a biblioteca, iremos importar no nosso arquivo principal o componente `BrowserRouter`, que será apelidado em nossa instrução de importação apenas de `Router`. Este é o componente de nível superior dentro do qual precisamos envolver nosso código roteável. A seguir, importaremos o `Routes`, que irá funcionar da mesma maneira que a instrução switch usada no primeiro exercício. Isso inclui todas as decisões de rota que precisam ser feitas durante a construção de um aplicativo. Por fim, construiremos as rotas com o componente `Route`, semelhante a cada uma das declarações de caso no bloco switch do exemplo anterior. Cada rota indica um caminho para capturar e renderizar um determinado componente ou bit de código JSX.
 
 Veja a aplicação dos componentes citados, modificando um pouco o arquivo principal desta aula, conforme exemplo a seguir:
 
@@ -210,20 +210,16 @@ Veja a aplicação dos componentes citados, modificando um pouco o arquivo princ
 ```
 import About from "./About";
 import Homepage from "./Homepage";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => (
     <div>
         <Router>
-            <Switch>
-                <Route path="/about">  
-                    <About />
-                </Route>
-
-                <Route path="/">
-                    <Homepage />
-                </Route>
-            </Switch>
+            <Routes>
+                <Route path="/" element={<Homepage />}/>
+                
+                <Route path="/about" element={<About />}/>
+            </Routes>
         </Router>
     </div>
 );
@@ -231,7 +227,7 @@ const App = () => (
 export default App;
 ```
 
-Note que temos realmente algo semelhante a instrução switch da função `RouteTo`, decidindo qual componente é renderizado com base no caminho da rota. Porém, a ordem das rotas dentro do componente `Switch` é estritamente importante: o programa começará a combinar as rotas, de cima para baixo, e retornará a primeira rota aplicável. Isso significa que se você tiver a rota padrão `/` acima da rota `/about`, então você nunca será capaz de alcançar a rota `/about`. Portanto, devemos ter cuidado ao definir a ordem desses componentes.
+Note que temos realmente algo semelhante a instrução switch da função `RouteTo`, decidindo qual componente é renderizado com base no caminho da rota. Porém, a ordem das rotas dentro do componente `Routes` é estritamente importante: o programa começará a combinar as rotas, de cima para baixo, e retornará a primeira rota aplicável. Isso significa que se você tiver a rota padrão `/` acima da rota `/about`, então você nunca será capaz de alcançar a rota `/about`. Portanto, devemos ter cuidado ao definir a ordem desses componentes.
 
 ## Tratando com parâmetros de pesquisa
 
@@ -289,24 +285,18 @@ Agora podemos utilizar o componente no nosso arquivo principal:
 import About from "./About";
 import Homepage from "./Homepage";
 import Search from "./Search";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => (
     <div>
         <Router>
-            <Switch>
-                <Route path="/about">  
-                    <About />
-                </Route>
-
-                <Route path="/search">  
-                    <Search />
-                </Route>
-
-                <Route path="/">
-                    <Homepage />
-                </Route>
-            </Switch>
+            <Routes>
+                <Route path="/" element={<Homepage />}/>
+                
+                <Route path="/about" element={<About />}/>  
+                
+                <Route path="/search" element={<Search />} />  
+            </Routes>
         </Router>
     </div>
 );
@@ -318,38 +308,45 @@ Teste em seu navegador `http:localhost:3000/search?q=lorem` ou `http:localhost:3
 
 ## Inserindo o componente "Not Found"
 
-Aproveitando a configuração das páginas com `Switch` e `Route`, podemos filtrar facilmente com a adição de algumas configurações nos componentes `Route`: primeiro, trazer a página inicial para o topo com o atributo `exact`, e, ao fim da lista de rotas possíveis, adicionar um componente default com o `path` configurado como qualquer coisa, com o símbolo `*`.
+Aproveitando a configuração das páginas com `Routes` e `Route`, podemos filtrar facilmente com a adição de algumas configurações nos componentes `Route`: primeiro, trazer a página inicial para o topo com o atributo `exact`, e, ao fim da lista de rotas possíveis, adicionar um componente default com o `path` configurado como qualquer coisa, com o símbolo `*`.
 
 Vejamos isso no exemplo a seguir:
+
+`NotFound.js`
+```
+import { Link } from 'react-router-dom';
+
+const NotFound = () => (
+    <div>
+        <h1>404 - Component Not Found</h1>
+        <Link to="/">Return to Home</Link>
+    </div>
+);
+
+export default NotFound;
+```
 
 `App.js`
 ```
 import About from "./About";
 import Homepage from "./Homepage";
 import Search from "./Search";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import NotFound from "./NotFound";
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => (
     <div>
         <Router>
-            <Switch>
-                <Route exact path="/">
-                    <Homepage />
-                </Route>
+            <Routes>
+                <Route path="/" element={<Homepage />}/>
+                
+                <Route path="/about" element={<About />}/>  
+                
+                <Route path="/search" element={<Search />} />  
 
-                <Route path="/about">  
-                    <About />
-                </Route>
-
-                <Route path="/search">  
-                    <Search />
-                </Route>
-
-                <Route path="*">
-                    <h1>404 - Component Not Found</h1>
-                    <a href="/">Return Home</a>
-                </Route>
-            </Switch>
+                <Route path="*" element={<NotFound />}/>
+            </Routes>
         </Router>
     </div>
 );
@@ -383,31 +380,24 @@ Agora podemos adicionar este componente na nossa estrutura de roteamento do arqu
 import About from "./About";
 import Homepage from "./Homepage";
 import Search from "./Search";
+import NotFound from "./NotFound";
 import Navbar from "./Navbar";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => (
     <div>
         <Router>
             <Navbar />
-            <Switch>
-                <Route exact path="/">
-                    <Homepage />
-                </Route>
+            <Routes>
+                <Route path="/" element={<Homepage />}/>
+                
+                <Route path="/about" element={<About />}/>  
+                
+                <Route path="/search" element={<Search />} />  
 
-                <Route path="/about">  
-                    <About />
-                </Route>
-
-                <Route path="/search">  
-                    <Search />
-                </Route>
-
-                <Route path="*">
-                    <h1>404 - Component Not Found</h1>
-                    <a href="/">Return Home</a>
-                </Route>
-            </Switch>
+                <Route path="*" element={<NotFound />}/>
+            </Routes>
         </Router>
     </div>
 );
