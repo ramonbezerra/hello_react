@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from './HomePage';
 import LoginPage from './LoginPage';
 import About from './About';
@@ -9,18 +9,20 @@ import AuthProvider from "./AuthProvider";
 import PrivateRoute from "./PrivateRoute";
 
 const App = () => (
-    <AuthProvider>
-        <Navbar />
-        <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route element={<PrivateOutlet />}>
-                {/* <Route path="/search" element={<PrivateRoute><Search /></PrivateRoute>} /> */}
-                <Route path="/search" element={<Search />} />
-                <Route path="/about" element={<About />} />
-            </Route>
-        </Routes>
-    </AuthProvider>
+    <BrowserRouter>
+        <AuthProvider>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                {/* <Route element={<PrivateOutlet />}> */}
+                    <Route path="/search" element={<PrivateRoute><Search /></PrivateRoute>} />
+                    {/* <Route path="/search" element={<Search />} /> */}
+                    <Route path="/about" element={<About />} />
+                {/* </Route> */}
+            </Routes>
+        </AuthProvider>
+    </BrowserRouter>
 );
 
 export default App;

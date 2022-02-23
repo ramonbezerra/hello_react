@@ -1,46 +1,34 @@
 # Lesson 4: Rotas de Aplicações com o React
 
-Nesta aula, vamos conhecer uma forma simples e robusta de mapear os caminhos fornecidos no navegador para a exibição de diferentes componentes em uma Single Page Application por meio da biblioteca React Router, através de exemplos simples descritos nos tópicos a seguir.
+Nesta aula, vamos conhecer uma forma simples e robusta de mapear os caminhos fornecidos no navegador para a exibição de diferentes componentes em uma Single Page Application por meio da biblioteca React Router (atualizada para a versão 6), através de exemplos simples descritos nos tópicos a seguir.
 
 ## Estrutura da aplicação
 
-Nossa aplicação estará estruturada na pasta `/src`, com a evolução do nosso aprendizado dividido em pastas como a resultante desta aula, `/lesson4`. Nessa pasta também estarão os arquivos de estilo e de script principais. 
+Nossa aplicação estará estruturada na pasta `/src`, com a evolução do nosso aprendizado dividido em pastas como a resultante desta aula, `/lesson4`. Nessa pasta também estarão os arquivos de estilo e de script principais.
 
-Ao lado da pasta `/src`, nós temos a pasta `/public`, com o arquivo `index.html` e o local onde os scripts farão a renderização do conteúdo. 
+Ao lado da pasta `/src`, nós temos a pasta `/public`, com o arquivo `index.html` e o local onde os scripts farão a renderização do conteúdo.
 
 Logo, a estrutura da nossa aplicação será da seguinte forma:
 
-```
+```text
 /documentation
     - lesson1.md
     - lesson2.md
     - lesson3.md
+    - lesson4.md
 /public
     - index.html
 /src
     /lesson1
-        - App.js
-        - Head.js
-        - Hello.js
-        - HelloPersonal.js
     /lesson2
-        - App.js
-        - Head.js
-        - Hello.js
-        - HelloPersonal.js
     /lesson3
-        - App.js
-        - ControlledForm.js
-        - FormikForm.js
-        - FormLevelValidation.js
-        - FormYupValidation.js
-        - PlainForm.js
     /lesson4
         - About.js
         - App.js
         - Homepage.js
         - Navbar.js
         - Search.js
+        - NotFound.js
     - index.css
     - index.js
 - package.json
@@ -49,11 +37,12 @@ Logo, a estrutura da nossa aplicação será da seguinte forma:
 Lembre-se de mudar o arquivo `/src/index.js` com o componente `App.js` desta aula.
 
 `/src/index.js`
-```
+
+```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './lesson4/App';
+import App from './lesson4/App'; // modifique aqui
 
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
@@ -65,7 +54,8 @@ Nas demonstrações utilizaremos o gerenciador de pacotes [yarn](https://yarnpkg
 O arquivo package.json estará configurado inicialmente da seguinte forma (algumas das configurações foram copiadas do [boilerplate create-react-app](https://pt-br.reactjs.org/docs/create-a-new-react-app.html)):
 
 `package.json`
-```
+
+```json
 {
     "name": "hello_react",
     "version": "0.1.0",
@@ -76,7 +66,7 @@ O arquivo package.json estará configurado inicialmente da seguinte forma (algum
       "react": "^17.0.1",
       "react-dom": "^17.0.1",
       "react-scripts": "^4.0.0",
-      "react-router-dom": "^5.2.0",
+      "react-router-dom": "^6.2.1",
       "yup": "^0.30.0"
     },
     "scripts": {
@@ -113,7 +103,8 @@ Os navegadores possuem APIs de histórico de navegação e localização, que pe
 Usando dessas APIs, a Location API, veja o exemplo abaixo de um componente que mostra como manipular, manualmente, três propriedades: a propriedade `window.location.href`, que exibirá o URL completo, incluindo o protocolo e o nome do domínio, a propriedade `window.location.pathname` conterá o caminho da página, e a propriedade `window.location.search`, contendo os parâmetros de pesquisa.
 
 `App.js`
-```
+
+```javascript
 const App = () => (
     <div>
         <h1>Example Router</h1>
@@ -131,12 +122,13 @@ export default App;
 
 Tente digitar várias URLs em seu navegador, como `http://localhost:3000/about` ou `http://localhost:3000/foo`, ou ainda `http:localhost:3000/search?q=lorem` e veja o resultado no seu componente, com a exibição do caminho completo em `href`, do caminho específico da página em `pathname` e dos parâmetros de pesquisa em `search`.
 
-Porém, nossa página não varia os componentes de acordo com o caminho que passamos. Para ilustrar um exemplo de troca de componentes em uma Single Page Application, vamos implementar uma função `RouteTo`, que basicamente recebe o path e mapeia a troca de página com base em duas possibilidades: se o usuário passar `/about`, será exibida uma página com o componente `About`, e qualquer outra coisa diferente disso, será exibida uma página com o componente `Homepage`. 
+Porém, nossa página não varia os componentes de acordo com o caminho que passamos. Para ilustrar um exemplo de troca de componentes em uma Single Page Application, vamos implementar uma função `RouteTo`, que basicamente recebe o path e mapeia a troca de página com base em duas possibilidades: se o usuário passar `/about`, será exibida uma página com o componente `About`, e qualquer outra coisa diferente disso, será exibida uma página com o componente `Homepage`.
 
 Essa implementação está no exemplo a seguir:
 
 `App.js`
-```
+
+```javascript
 import About from "./About";
 import Homepage from "./Homepage";
 
@@ -171,7 +163,8 @@ export default App;
 Implemente também os componentes abaixo:
 
 `About.js`
-```
+
+```javascript
 const About = () => (
     <div className="About">
         <h1>About Page</h1>
@@ -184,7 +177,8 @@ export default About;
 ```
 
 `Homepage.js`
-```
+
+```javascript
 const Homepage = () => (
     <div className="Homepage">
         <h1>Homepage</h1>
@@ -200,27 +194,28 @@ Faça novametne o teste em seu navegador, digitando as rotas `http://localhost:3
 
 ## Trabalhando com React Router
 
-O React Router, conforme apresentado no início, é uma biblioteca com uma proposta simples e ao mesmo tempo robusta de trabalhar com roteamento de páginas de Single Page Applications, fornecendo vários mecanismos integrados diferentes para roteamento para componentes, tratamento de rotas padrão e de erro e ainda mais funcionalidades detalhadas, como lidar com autenticação. 
+O React Router, conforme apresentado no início, é uma biblioteca com uma proposta simples e ao mesmo tempo robusta de trabalhar com roteamento de páginas de Single Page Applications, fornecendo vários mecanismos integrados diferentes para roteamento para componentes, tratamento de rotas padrão e de erro e ainda mais funcionalidades detalhadas, como lidar com autenticação.
 
-Para trabalhar com a biblioteca, iremos importar no nosso arquivo principal o componente `BrowserRouter`, que será apelidado em nossa instrução de importação apenas de `Router`. Este é o componente de nível superior dentro do qual precisamos envolver nosso código roteável. A seguir, importaremos o `Routes`, que irá funcionar da mesma maneira que a instrução switch usada no primeiro exercício. Isso inclui todas as decisões de rota que precisam ser feitas durante a construção de um aplicativo. Por fim, construiremos as rotas com o componente `Route`, semelhante a cada uma das declarações de caso no bloco switch do exemplo anterior. Cada rota indica um caminho para capturar e renderizar um determinado componente ou bit de código JSX.
+Para trabalhar com a biblioteca, iremos importar no nosso arquivo principal o componente `BrowserRouter`. Este é o componente de nível superior dentro do qual precisamos envolver nosso código roteável. A seguir, importaremos o `Routes`, que irá funcionar da mesma maneira que a instrução switch usada no primeiro exercício. Isso inclui todas as decisões de rota que precisam ser feitas durante a construção de um aplicativo. Por fim, construiremos as rotas com o componente `Route`, semelhante a cada uma das declarações de caso no bloco switch do exemplo anterior. Cada rota indica um caminho para capturar e renderizar um determinado componente ou bit de código JSX.
 
 Veja a aplicação dos componentes citados, modificando um pouco o arquivo principal desta aula, conforme exemplo a seguir:
 
 `App.js`
-```
+
+```javascript
 import About from "./About";
 import Homepage from "./Homepage";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const App = () => (
     <div>
-        <Router>
+        <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Homepage />}/>
                 
                 <Route path="/about" element={<About />}/>
             </Routes>
-        </Router>
+        </BrowserRouter>
     </div>
 );
 
@@ -236,7 +231,8 @@ Note que temos realmente algo semelhante a instrução switch da função `Route
 Para resolver esse problema, trabalharemos com o módulo `useLocation` do `react-router-dom`, que nos permite capturar esses dados, os parâmetros de pesquisa, montando um novo componente, `Search`, com alguns itens mockados para simular uma pesquisa, efetivada na função `doSearch`, conforme o arquivo a seguir:
 
 `Search.js`
-```
+
+```javascript
 import { useLocation } from 'react-router-dom';
 
 const Items = [
@@ -281,15 +277,16 @@ Note o uso da constante `query` com a informação dos parâmetros de pesquisa, 
 Agora podemos utilizar o componente no nosso arquivo principal:
 
 `App.js`
-```
+
+```javascript
 import About from "./About";
 import Homepage from "./Homepage";
 import Search from "./Search";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const App = () => (
     <div>
-        <Router>
+        <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Homepage />}/>
                 
@@ -297,7 +294,7 @@ const App = () => (
                 
                 <Route path="/search" element={<Search />} />  
             </Routes>
-        </Router>
+        </BrowserRouter>
     </div>
 );
 
@@ -313,7 +310,8 @@ Aproveitando a configuração das páginas com `Routes` e `Route`, podemos filtr
 Vejamos isso no exemplo a seguir:
 
 `NotFound.js`
-```
+
+```javascript
 import { Link } from 'react-router-dom';
 
 const NotFound = () => (
@@ -327,17 +325,18 @@ export default NotFound;
 ```
 
 `App.js`
-```
+
+```javascript
 import About from "./About";
 import Homepage from "./Homepage";
 import Search from "./Search";
 import NotFound from "./NotFound";
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const App = () => (
     <div>
-        <Router>
+        <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Homepage />}/>
                 
@@ -347,7 +346,7 @@ const App = () => (
 
                 <Route path="*" element={<NotFound />}/>
             </Routes>
-        </Router>
+        </BrowserRouter>
     </div>
 );
 
@@ -359,7 +358,8 @@ export default App;
 Até aqui configuramos a nossa página apenas acessando as rotas ao digitar na barra de endereços. Vamos configurar um novo componente, `Navbar`, uma barra com os links da nossa aplicação, usando o componente `Link` da biblioteca `react-router-dom`. Veja um exemplo simples no arquivo abaixo:
 
 `Navbar.js`
-```
+
+```javascript
 import { Link } from 'react-router-dom';
 
 const Navbar = () => (
@@ -373,21 +373,22 @@ const Navbar = () => (
 export default Navbar;
 ```
 
-Agora podemos adicionar este componente na nossa estrutura de roteamento do arquivo principal, no mesmo nível do componente `Router`:
+Agora podemos adicionar este componente na nossa estrutura de roteamento do arquivo principal, no mesmo nível do componente `BrowserRouter`:
 
 `App.js`
-```
+
+```javascript
 import About from "./About";
 import Homepage from "./Homepage";
 import Search from "./Search";
 import NotFound from "./NotFound";
 import Navbar from "./Navbar";
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const App = () => (
     <div>
-        <Router>
+        <BrowserRouter>
             <Navbar />
             <Routes>
                 <Route path="/" element={<Homepage />}/>
@@ -398,7 +399,7 @@ const App = () => (
 
                 <Route path="*" element={<NotFound />}/>
             </Routes>
-        </Router>
+        </BrowserRouter>
     </div>
 );
 

@@ -12,9 +12,9 @@ const LoginSchema = Yup.object().shape({
 const LoginPage = () => {
   const { login } = React.useContext(authContext); // that's all!
   let navigate = useNavigate();
-  let { state } = useLocation();
+  let location = useLocation();
 
-  let from = state?.from?.pathname || "/search";
+  let from = location.state?.from || "/";
 
   const handleSubmitting = (values, { setSubmitting, setStatus }) => {
     setStatus({ isValidating: true });
