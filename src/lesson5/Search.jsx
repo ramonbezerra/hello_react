@@ -26,7 +26,7 @@ const Search = () => {
         <div>
             <h1>Search Page</h1>
             <hr />
-            Found results for {term}:
+        Found results for {term}:
             <ul>
                 {returned.map(t => (<li key={t}>{t}</li>))}
             </ul>

@@ -1,16 +1,7 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { authContext } from './AuthProvider';
+import { Link, Outlet } from 'react-router-dom';
 
 const Navbar = () => {
-  const { authed, logout } = React.useContext(authContext);
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
-
   return (
     <div>
       <nav>
@@ -25,8 +16,8 @@ const Navbar = () => {
             <Link to="/search">Search</Link>
           </li>
         </ul>
-        {authed && <button onClick={handleLogout}>Logout</button>}
       </nav>
+      <Outlet />
     </div>
   );
 }

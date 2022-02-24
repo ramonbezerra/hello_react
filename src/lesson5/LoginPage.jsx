@@ -1,8 +1,8 @@
-import React  from 'react';
+import React from 'react';
 import { Formik, ErrorMessage, Field } from 'formik';
 import * as Yup from 'yup';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { authContext } from './AuthProvider';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().required('Required').email('Invalid'),
@@ -10,7 +10,7 @@ const LoginSchema = Yup.object().shape({
 });
 
 const LoginPage = () => {
-  const { login } = React.useContext(authContext); // that's all!
+  const { login } = React.useContext(authContext);
   let navigate = useNavigate();
   let location = useLocation();
 
@@ -18,12 +18,12 @@ const LoginPage = () => {
 
   const handleSubmitting = (values, { setSubmitting, setStatus }) => {
     setStatus({ isValidating: true });
-    login().then(navigate(from, { replace: true }));      
+    login().then(navigate(from, { replace: true }))
     setTimeout(() => {
-      setSubmitting(false);
       console.info(JSON.stringify(values, null, 2));
+      setSubmitting(false); // iremos fazer modificações aqui
       setStatus({ isValidating: false });
-    }, 3000);
+    }, 400);
   };
 
   return (

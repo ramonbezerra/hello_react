@@ -272,6 +272,7 @@ import About from "./About";
 import HomePage from "./HomePage";
 import Search from "./Search";
 import NotFound from "./NotFound";
+import LoginPage from "./LoginPage";
 import Navbar from "./Navbar";
 import AuthProvider from "./AuthProvider";
 
@@ -284,7 +285,7 @@ const App = () => (
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<HomePage />}/>
-                    
+                    <Route path="/login" element={<LoginPage />} />
                     <Route path="/about" element={<About />}/>  
                     
                     <Route path="/search" element={<Search />} />  
@@ -325,6 +326,7 @@ Criado o componente acima, basta englobar qualquer elemento de uma rota, conform
 ```javascript
 import About from "./About";
 import HomePage from "./HomePage";
+import LoginPage from "./LoginPage";
 import Search from "./Search";
 import NotFound from "./NotFound";
 import Navbar from "./Navbar";
@@ -339,7 +341,7 @@ const App = () => (
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<HomePage />}/>
-                    
+                    <Route path="/login" element={<LoginPage />}/>
                     <Route path="/about" element={<About />}/>  
                     
                     <Route path="/search" element={<PrivateRoute><Search /></PrivateRoute>} />  
@@ -437,12 +439,13 @@ const App = () => (
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<HomePage />}/>
-                    
+                    <Route path="/login" element={<LoginPage />}/>
+
                     <Route element={<PrivateOutlet />}>
                         <Route path="/search" element={<Search />} /> 
-                        <Route path="/about" element={<About />} />
                     </Route>
 
+                    <Route path="/about" element={<About />} />
                     <Route path="*" element={<NotFound />}/>
                 </Routes>
             </AuthProvider>

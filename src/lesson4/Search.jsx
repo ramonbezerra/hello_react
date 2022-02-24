@@ -17,7 +17,7 @@ const doSearch = term => {
     return Items.filter(item => item.toLowerCase().indexOf(term.toLowerCase()) !== -1);
 };
 
-const Search = props => {
+const Search = () => {
     const query = new URLSearchParams(useLocation().search);
     const term = query.get('q');
     const returned = doSearch(term);
