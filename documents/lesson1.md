@@ -27,7 +27,7 @@ Logo, a estrutura da nossa aplicação será da seguinte forma:
 
 Nas demonstrações utilizaremos o gerenciador de pacotes [yarn](https://yarnpkg.com/), que opera sobre o [npm](https://www.npmjs.com/) mas você pode utilizar também o próprio npm para instalar as dependências executar ou buildar a aplicação.
 
-O arquivo package.json estará configurado inicialmente da seguinte forma (algumas das configurações foram copiadas do [boilerplate create-react-app](https://pt-br.reactjs.org/docs/create-a-new-react-app.html)):
+O arquivo package.json estará configurado inicialmente da seguinte forma (algumas das configurações foram copiadas do [boilerplate create-react-app](https://create-react-app.dev/)):
 
 `package.json`
 ```
@@ -36,9 +36,9 @@ O arquivo package.json estará configurado inicialmente da seguinte forma (algum
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-      "react": "^17.0.1",
-      "react-dom": "^17.0.1",
-      "react-scripts": "^4.0.0"
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-scripts": "^5.0.1"
     },
     "scripts": {
       "start": "react-scripts start",
