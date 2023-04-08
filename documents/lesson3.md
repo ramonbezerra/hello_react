@@ -56,7 +56,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 Nas demonstrações utilizaremos o gerenciador de pacotes [yarn](https://yarnpkg.com/), que opera sobre o [npm](https://www.npmjs.com/) mas você pode utilizar também o próprio npm para instalar as dependências executar ou buildar a aplicação.
 
-O arquivo package.json estará configurado inicialmente da seguinte forma (algumas das configurações foram copiadas do [boilerplate create-react-app](https://pt-br.reactjs.org/docs/create-a-new-react-app.html)):
+O arquivo package.json estará configurado inicialmente da seguinte forma (algumas das configurações foram copiadas do [boilerplate create-react-app](https://create-react-app.dev/)):
 
 `package.json`
 ```
@@ -67,9 +67,9 @@ O arquivo package.json estará configurado inicialmente da seguinte forma (algum
     "dependencies": {
       "axios": "^0.21.0",
       "formik": "^2.2.5",
-      "react": "^17.0.1",
-      "react-dom": "^17.0.1",
-      "react-scripts": "^4.0.0",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-scripts": "^5.0.1",
       "react-router-dom": "^5.2.0",
       "yup": "^0.30.0"
     },
