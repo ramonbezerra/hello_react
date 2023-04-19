@@ -65,13 +65,11 @@ O arquivo package.json estará configurado inicialmente da seguinte forma (algum
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-      "axios": "^0.21.0",
-      "formik": "^2.2.5",
+      "formik": "^2.2.9",
       "react": "^18.2.0",
       "react-dom": "^18.2.0",
       "react-scripts": "^5.0.1",
-      "react-router-dom": "^5.2.0",
-      "yup": "^0.30.0"
+      "yup": "^1.1.1"
     },
     "scripts": {
       "start": "react-scripts start",
