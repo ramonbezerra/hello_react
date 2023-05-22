@@ -456,4 +456,4 @@ const App = () => (
 export default App;
 ```
 
-Chegamos ao fim. A demonstração completa em vídeo está disponível clicando neste link. Bons estudos!
+Chegamos ao fim. Bons estudos!
